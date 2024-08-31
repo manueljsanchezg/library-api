@@ -58,6 +58,13 @@ public class BookService {
             book.setYear(bookDTO.getYear());
             book.setGenre(bookDTO.getGenre());
 
+            Author author = authorRepository.findByName(bookDTO.getAuthorName());
+            if (author == null) {
+                author = new Author();
+                author.setName(bookDTO.getAuthorName());
+                authorRepository.save(author);
+            }
+            book.setAuthor(author);
             return bookRepository.save(book);
         } else {
             throw new EntityNotFoundException("Book not found with id " + id);

@@ -1,6 +1,7 @@
 package com.manueljsanchezg.libray_backend.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
@@ -76,5 +77,10 @@ public class Book {
     }
     public void setAuthor(Author author) {
         this.author = author;
+    }
+
+    @JsonProperty("author_name")
+    public String getAuthorName() {
+        return author != null ? author.getName() : null;
     }
 }
